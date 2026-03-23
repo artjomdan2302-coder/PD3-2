@@ -1,0 +1,9 @@
+$log = "$env:USERPROFILE\Documents\Servisi.log"
+$time = Get-Date
+
+$services = "Spooler", "wuauserv"
+
+foreach ($s in $services) {
+    $status = (Get-Service $s).Status
+    "$time Serviss $s ir $status" | Out-File $log -Append
+}
