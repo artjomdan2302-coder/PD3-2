@@ -1,0 +1,15 @@
+$defenderStatus = Get-MpComputerStatus
+
+$score = 100
+
+if ($defenderStatus.RealTimeProtectionEnabled -eq $false) {
+$score -= 50
+}
+
+if ($defenderStatus.AntivirusSignatureAge -gt 3) {
+$score -= 20
+}
+
+if ($defenderStatus.QuickScanAge -gt 7) {
+$score -= 20
+}
