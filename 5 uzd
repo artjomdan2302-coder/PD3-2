@@ -1,0 +1,3 @@
+$programas = winget list | Select-String "msstore"
+$skaits = $apps.Count
+Write-Output "$skaits of apps from Microsoft Store installed on the system."
