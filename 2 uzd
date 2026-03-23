@@ -1,0 +1,11 @@
+$failaCels = "$env:USERPROFILE\Documents\Warnings.txt"
+
+$events = Get-WinEvent -LogName Application | Where-Object {
+    $_.LevelDisplayName -eq "Warning" -and $_.TimeCreated -gt (Get-Date).AddDays(-3)
+}
+
+$events | Out-File $failaCels
+
+$top = $events | Group-Object ProviderName | Sort-Object Count -Descending | Select-Object -First 3
+
+$top | Out-File $failaCels -Append
